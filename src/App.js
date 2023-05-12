@@ -1,25 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import TodoList from "./component/ToDoList";
+import NewTodoForm from "./component/NewToDoForm";
+import { useState } from "react";
 
-function App() {
+export default function App() {
+  const [todos, setTodos] = useState([
+    { text: "Have Fun", completed: true },
+    { text: "Learn React", completed: false },
+    { text: "Learn the MERN-Stack", completed: false },
+  ]);
+
+  const [showTodos, setShowTodos] = useState([true]);
+
+  function removeTodos(idx) {
+    const newToDolist = todos.filter((todo, i) => i != idx);
+    setTodos(newToDolist);
+  }
+
+  function toggleTodo(idx) {
+    const el = document.getElementById(`toDotext{idx}`);
+    const elCk = document.getElementById(`check{idx}`);
+    console.log(elCk);
+
+    el.style.textDecoration == "line-through"
+      ? (el.style.textDecoration = "none")
+      : (el.style.textDecoration = "line-through");
+    elCk.src == "✅" ? (elCk.src = "❎") : (elCk.src = "✅");
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>React To-Do</h1>
+
+      <button onClick={() => setShowTodos(!showTodos)}>
+        {showTodos ? "HIDE" : "SHOW"}
+      </button>
+
+      {showTodos && (
+        <TodoList
+          todoList={todos}
+          setTodos={setTodos}
+          toggleTodo={toggleTodo}
+          removeTodos={removeTodos}
+        />
+      )}
+
+      <hr />
+      <NewTodoForm todos={todos} setTodos={setTodos} />
     </div>
   );
 }
-
-export default App;

@@ -1,0 +1,24 @@
+.ToDoListItem {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 4vmin;
+  padding: 2vmin;
+  border: 1px solid purple;
+  list-style: none;
+  font-size: 6vmin;
+}
+
+.ListItemIndex {
+  width: 8vmin;
+  height: 8vmin;
+  margin-right: 4vmin;
+  background-color: black;
+  color: white;
+  border-radius: 50%;
+  text-align: center;
+}
+
+.ListItemAction {
+  align-self: flex-end;
+}
